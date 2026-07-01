@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esse DUI Media Player</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="player-container">
+        <!-- Header -->
+        <div class="player-header">
+            <div class="pulse-indicator"></div>
+            <span class="header-title">SHINIGAMI MEDIA PLAYER</span>
+            <span class="status-badge" id="playbackStatus">PLAYING</span>
+        </div>
+
+        <!-- Video Display Area -->
+        <div class="video-wrapper">
+            <div id="yt-player"></div>
+            <div class="video-overlay"></div>
+        </div>
+
+        <!-- Controls HUD -->
+        <div class="player-controls">
+            <div class="track-info">
+                <span class="track-title" id="trackTitle">Loading song metadata...</span>
+                <span class="track-artist" id="trackArtist">YouTube Broadcast</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-time">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+
+            <!-- Custom Buttons Panel -->
+            <div class="buttons-panel">
+                <div class="visualizer-container" id="visualizer">
+                    <span class="bar bar-1"></span>
+                    <span class="bar bar-2"></span>
+                    <span class="bar bar-3"></span>
+                    <span class="bar bar-4"></span>
+                    <span class="bar bar-5"></span>
+                    <span class="bar bar-6"></span>
+                    <span class="bar bar-7"></span>
+                    <span class="bar bar-8"></span>
+                </div>
+
+                <div class="volume-hud">
+                    <span class="volume-icon">🔊</span>
+                    <span id="volumeLevel">100%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+</html>
