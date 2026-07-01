@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defaced by ESSE</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Courier+Prime:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Matrix Canvas -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Main Container -->
+    <div class="deface-wrapper">
+        <div class="notice-header">
+            <div class="system-notice">SYSTEM NOTICE</div>
+            <h1 class="defaced-title">This server has been defaced by</h1>
+        </div>
+
+        <!-- Center Profile Badge -->
+        <div class="profile-container">
+            <!-- Pfp Name Tag (online indicator on top-left of circle) -->
+            <div class="pfp-label">
+
+
+            </div>
+
+            <!-- Avatar Circle -->
+            <div class="avatar-circle">
+                <div class="letter-avatar">F</div>
+            </div>
+
+            <h2 class="hacker-name">Frncs Esse</h2>
+            <div class="hacker-team">SHINIGAMI × ESSE</div>
+            <div class="chain-link">🔗</div>
+        </div>
+
+        <!-- Bottom Left: System Specifications Card -->
+        <div class="sys-info-card">
+            <div class="info-row">
+                <span class="info-label">User-Agent</span>
+                <span class="info-val" id="userAgentVal">Loading...</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Client IP</span>
+                <span class="info-val" id="ipVal">127.0.0.1:666</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Execution</span>
+                <span class="info-val" id="executionVal">0.0000001337 seconds</span>
+            </div>
+        </div>
+
+        <!-- Bottom Banner Section -->
+        <div class="bottom-banner">
+            <div class="green-scanline"></div>
+
+            <!-- Marquee Container -->
+            <div class="marquee-wrapper">
+                <div class="marquee-content">
+                    FRNCS — OW4 — QUICA — BERT — PENTA — RAVEN — ZULU — DIKYA — TREVOR — SUNNIE — BERTO — MIGUEL — ROYCE
+                    &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Team S/O: SHINIGAMI — ESSE
+                    &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Members: FRNCS — OW4 — QUICA — BERT — PENTA — RAVEN — ZULU —
+                    DIKYA — TREVOR — SUNNIE — BERTO — MIGUEL
+                    <div class="footer-link">
+                        @ shinigami — esse.world
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden background audio player (supports local music.mp3 and youtube fallback) -->
+            <div id="yt-player-container">
+                <audio id="deface-audio" src="music.mp3" loop></audio>
+                <iframe id="deface-audio-iframe" src="" allow="autoplay" style="display: none; width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- Main Controller Script -->
+            <script src="script.js"></script>
+        </div>
+    </div>
+</body>
+
+</html>

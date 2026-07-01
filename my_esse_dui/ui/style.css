@@ -1,0 +1,315 @@
+/* =========================================================================
+   DEFACE PAGE STYLE - THEME DEFACE / hacker overlay
+   ========================================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Background canvas for matrix falling text */
+#matrixCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.35;
+}
+
+/* Main UI Wrapper */
+.deface-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 40px 30px 40px;
+    background: radial-gradient(circle, rgba(0,0,0,0) 30%, rgba(0,0,0,0.8) 100%);
+}
+
+/* Notice Header */
+.notice-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.system-notice {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: #a0a0ab;
+    text-transform: uppercase;
+}
+
+.defaced-title {
+    font-family: 'Cinzel', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 42px;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.75);
+}
+
+/* Profile Badge Container */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: -30px;
+}
+
+/* Label on top-left of circle */
+.pfp-label {
+    position: absolute;
+    left: -130px;
+    top: 15px;
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+.online-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff66, 0 0 15px #00ff66;
+    display: inline-block;
+}
+
+/* Circle Avatar */
+.avatar-circle {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    border: 3.5px solid #ffcc00;
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.5);
+    overflow: hidden;
+    background: rgba(10, 10, 15, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.letter-avatar {
+    font-family: 'Cinzel', serif;
+    font-size: 85px;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    margin-top: -5px;
+}
+
+.hacker-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #ffcc00;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+    margin-bottom: 4px;
+}
+
+.hacker-team {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #a0a0ab;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+.chain-link {
+    font-size: 18px;
+    color: #ffcc00;
+    text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
+    animation: floatAnim 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes floatAnim {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(6px);
+    }
+}
+
+/* System Specifications Box */
+.sys-info-card {
+    position: absolute;
+    bottom: 120px;
+    left: 45px;
+    width: 440px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px;
+    z-index: 10;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    color: #ffcc00;
+    font-weight: 700;
+}
+
+.info-val {
+    color: #ffffff;
+    text-align: right;
+    word-break: break-all;
+    max-width: 300px;
+}
+
+/* Live Hacking Chat Box */
+.chat-overlay {
+    position: absolute;
+    bottom: 120px;
+    right: 45px;
+    width: 320px;
+    height: 180px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    z-index: 10;
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.chat-msg {
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px;
+    color: #ff5252;
+    text-shadow: 0 0 6px rgba(255, 82, 82, 0.4);
+    animation: msgFadeIn 0.2s ease-out forwards;
+}
+
+@keyframes msgFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Bottom Banner and Tickers */
+.bottom-banner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.green-scanline {
+    width: 100%;
+    height: 2.5px;
+    background-color: #00ff66;
+    box-shadow: 0 0 10px #00ff66, 0 0 20px rgba(0, 255, 102, 0.6);
+    margin-bottom: 12px;
+}
+
+.marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 6px;
+}
+
+.marquee-content {
+    display: inline-block;
+    padding-left: 100%;
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    animation: scrollMarquee 42s linear infinite;
+}
+
+@keyframes scrollMarquee {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+.footer-link {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #ffcc00;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+    text-shadow: 0 0 6px rgba(255, 204, 0, 0.35);
+}
+
+/* Off-screen hidden YouTube player to bypass autoplay restriction */
+#yt-player-container {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    width: 200px;
+    height: 200px;
+    opacity: 0.001;
+    pointer-events: none;
+}
+
+#yt-player-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
