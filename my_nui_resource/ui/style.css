@@ -180,13 +180,6 @@ html, body {
     margin: 2px 8px;
     font-family: 'Inter', sans-serif;
     transition: color 0.1s, border-color 0.1s, background 0.1s;
-    opacity: 0;
-    animation: itemFadeIn 0.15s ease forwards;
-}
-
-@keyframes itemFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
 }
 
 .menu-item:hover  { background: rgba(255, 255, 255, 0.02); color: #ffffff; }

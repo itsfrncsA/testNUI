@@ -341,9 +341,6 @@
             const isActive = (idx === selectedIndex);
             li.className   = `menu-item${isActive ? ' active' : ''}`;
 
-            // Stagger animation
-            li.style.animationDelay = `${idx * 28}ms`;
-
             // Label block (with optional desc)
             const labelBlock = document.createElement('div');
             labelBlock.className = 'item-label';
