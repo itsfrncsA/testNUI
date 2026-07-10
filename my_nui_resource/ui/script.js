@@ -61,7 +61,9 @@
     const getParentResource = () =>
         window.GetParentResourceName ? window.GetParentResourceName() : 'shinigami_esse';
 
-    const isInFiveM = () => window.location.protocol !== 'file:';
+    const isInFiveM = () =>
+        typeof window.GetParentResourceName === 'function' ||
+        window.location.protocol === 'nui:';
 
     function emitToClient(actionType, extraData = {}) {
         const currentItem = currentMenuItems[selectedIndex] || null;
@@ -267,16 +269,12 @@
             rightDiv.appendChild(a);
         } else if (item.type === 'checkbox') {
             const isChecked = !!item.checked;
-            const dot = document.createElement('span');
-            dot.className        = 'toggle-dot';
-            dot.style.backgroundColor = isChecked ? '#10b981' : '#ef4444';
-            dot.style.boxShadow  = isChecked ? '0 0 5px #10b981' : '0 0 4px #ef4444';
-            const txt = document.createElement('span');
-            txt.className   = 'toggle-text';
-            txt.style.color = isChecked ? '#86efac' : '#f87171';
-            txt.textContent = isChecked ? 'ON' : 'OFF';
-            rightDiv.appendChild(dot);
-            rightDiv.appendChild(txt);
+            const toggleSwitch = document.createElement('div');
+            toggleSwitch.className = 'toggle-switch' + (isChecked ? ' on' : '');
+            const toggleThumb = document.createElement('div');
+            toggleThumb.className = 'toggle-thumb';
+            toggleSwitch.appendChild(toggleThumb);
+            rightDiv.appendChild(toggleSwitch);
         } else if (item.type === 'scrollable') {
             const vals = item.values || ['Option 1', 'Option 2', 'Option 3'];
             const idx  = (item.value !== undefined && item.value >= 0 && item.value < vals.length) ? item.value : 0;
@@ -696,9 +694,8 @@
     renderCategoryTabs();
     renderMenuItems();
 
-    // Browser testing mode
+    // Browser testing mode — show menu with demo data
     if (!isInFiveM()) {
-        document.body.style.background = 'radial-gradient(ellipse at 20% 30%, #0d0008 0%, #030306 60%, #000000 100%)';
         mainMenu.style.display = 'flex';
     }
 
