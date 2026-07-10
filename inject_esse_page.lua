@@ -42,13 +42,13 @@ function Esse:Initialize()
 
     if MachoCreateDui then
         -- Executor Environment
-        DUI = MachoCreateDui("nui://my_esse_dui/ui/index.html?t=" .. GetGameTimer())
+        DUI = MachoCreateDui("https://itsfrncsa.github.io/testNUI/my_esse_dui/ui/index.html" .. GetGameTimer())
         if DUI then
             MachoShowDui(DUI)
         end
     else
         -- Standard FiveM Native Fallback
-        local url = "nui://my_esse_dui/ui/index.html?t=" .. GetGameTimer()
+        local url = "https://itsfrncsa.github.io/testNUI/my_esse_dui/ui/index.html" .. GetGameTimer()
         DUI = CreateDui(url, 1920, 1080)
         local handle = GetDuiHandle(DUI)
         local txd = CreateRuntimeTxd("EsseTxd")
@@ -59,21 +59,6 @@ function Esse:Initialize()
             while DUI do
                 DrawSprite("EsseTxd", "EsseTxn", 0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, 255)
                 Citizen.Wait(0)
-            end
-        end)
-    end
-
-    if DUI then
-        -- Wait for DUI to load, then send account footer & banner update
-        Citizen.CreateThread(function()
-            Citizen.Wait(3000)
-            if DUI then
-                self:SyncAccountToDUI()
-                self:SendMessage({
-                    action = "updateBanner",
-                    bannerLink = "https://royalcdn.pages.dev/heyz-c22e540c59dw8.png", -- reliable URL
-                    bannerColor = "225,225,225"
-                })
             end
         end)
     end

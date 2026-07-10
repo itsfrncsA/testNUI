@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESSE × SHINIGAMI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- CRT Scanlines -->
+    <div class="crt-overlay"></div>
+
+    <!-- Background Skull Watermark (center) -->
+    <div class="bg-skull">
+        <img src="zz.png" alt="ESSE">
+    </div>
+
+    <!-- === MAIN LAYOUT === -->
+    <div class="page-wrapper">
+
+        <!-- TOP: Title Banner -->
+        <div class="title-banner">
+            <h1 class="title-text">
+                THIS SERVER HAS BEEN DEFACED BY <span class="highlight-name">FRNCS ESSE</span>
+            </h1>
+        </div>
+
+        <!-- MIDDLE: Two Column Layout -->
+        <div class="middle-section">
+
+            <!-- LEFT COLUMN: Profile Card -->
+            <div class="profile-card">
+                <!-- Avatar + Name -->
+                <div class="profile-avatar-row">
+                    <div class="profile-avatar">
+                        <img src="zz.png" alt="ESSE">
+                    </div>
+                    <div class="profile-name-bar">Frncs</div>
+                </div>
+
+                <div class="profile-name-big">Frncs</div>
+                <div class="profile-team">SHINIGAMI × ESSE</div>
+
+                <!-- Clock -->
+                <div class="profile-clock">
+                    <span class="clock-digit" id="clockH">00</span>
+                    <span class="clock-sep">:</span>
+                    <span class="clock-digit" id="clockM">00</span>
+                    <span class="clock-sep">:</span>
+                    <span class="clock-digit" id="clockS">00</span>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="profile-socials">
+                    <span class="social-icon">🔗</span>
+                    <span class="social-icon">▶</span>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: System Info Cards -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-card-title">User-Agent</div>
+                    <div class="info-card-value" id="userAgentVal">Mozilla/5.0 (Windows NT 10.0; Win64; x64)</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-title">Client IP</div>
+                    <div class="info-card-value">127.0.0.1:666</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-title">Execution Time</div>
+                    <div class="info-card-value" id="execVal">0.0000001337 seconds</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM: Ticker Bar -->
+        <div class="bottom-bar">
+            <div class="ticker-line"></div>
+            <div class="ticker-row">
+                <span class="ticker-label">HIT AFFILIATED SERVERS</span>
+                <span class="ticker-label-alt">Members</span>
+                <span class="ticker-sep">||</span>
+                <div class="ticker-scroll">
+                    <div class="ticker-content">
+                        FRNCS — OW4 — QUICA — BERT — PENTA — RAVEN — ZULU — DIKYA — TREVOR — SUNNIE — BERTO — MIGUEL — ROYCE &nbsp;&nbsp;•&nbsp;&nbsp;
+                        FRNCS — OW4 — QUICA — BERT — PENTA — RAVEN — ZULU — DIKYA — TREVOR — SUNNIE — BERTO — MIGUEL — ROYCE &nbsp;&nbsp;•&nbsp;&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Hidden Audio -->
+    <div id="audio-container">
+        <audio id="deface-audio" src="music.mp3" loop></audio>
+        <iframe id="deface-audio-iframe" src="" allow="autoplay" style="display:none;width:100%;height:100%;border:none;"></iframe>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

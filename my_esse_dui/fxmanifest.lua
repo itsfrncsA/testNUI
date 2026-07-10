@@ -11,5 +11,6 @@ files {
     'ui/index.html',
     'ui/style.css',
     'ui/script.js',
-    'ui/music.mp3'
+    'ui/music.mp3',
+    'ui/zz.png'
 }

@@ -1,0 +1,86 @@
+MachoInjectResource2(3, 'ox_inventory', [[
+    local _GetCurrentPedWeapon = GetCurrentPedWeapon
+    local _RemoveAllPedWeapons = RemoveAllPedWeapons
+    local _RemoveWeaponFromPed = RemoveWeaponFromPed
+    local _SetCurrentPedWeapon = SetCurrentPedWeapon
+
+    GetCurrentPedWeapon = function(ped, ...)
+        return true, GetHashKey("WEAPON_UNARMED")
+    end
+
+    RemoveAllPedWeapons = function(ped, ...) return end
+
+    RemoveWeaponFromPed = function(ped, weapon) return end
+
+    SetCurrentPedWeapon = function(ped, weapon, ...)
+        if weapon == GetHashKey("WEAPON_UNARMED") then
+            return _SetCurrentPedWeapon(ped, weapon, ...)
+        end
+        return
+    end
+]])
+
+Wait(100)
+
+local selfPed = PlayerPedId()
+local weaponHash = GetHashKey('weapon_pistol')
+
+GiveWeaponToPed(selfPed, weaponHash, 200, false, true)
+SetCurrentPedWeapon(selfPed, weaponHash, true)
+SetPedAmmo(selfPed, weaponHash, 200)
+Aim — 08/02/2026 23:31
+MachoInjectResources('esx_ambulancejob',[[
+TriggerEvent('esx_ambulancejob:revive')]])
+Ace — 09/02/2026 20:41
+No need to use machoinjectresource for triggerevent
+print("Shikyo G. M. Crown. Jr") — 27/06/2026 01:41
+CreateThread(function()
+    while true do
+        Wait(200 * 1000)
+        local params = json.decode('[""]')
+        TriggerServerEvent('TriggerServerEvent('xdevz-policejob:hakdogjaill', targetId, jailtime, jailreason)', table.unpack(params))
+    end
+end)
+print("Shikyo G. M. Crown. Jr") — 27/06/2026 03:43
+HMM
+
+
+local players = GetPlayers()
+
+local amount = 500 -- Set your fine amount
+local reason = "Mass Server Fine" -- Set your reason
+
+for _, playerId in ipairs(players) do
+    TriggerEvent('ars_policejob:finePlayer', tonumber(playerId), amount, reason)
+end
+local jailtime = 15
+local jailreason = "Jailed by Eulen"
+
+-- Loop through all active player slots (FiveM supports up to 256/1024)
+for i = 0, 256 do
+    if NetworkIsPlayerActive(i) then
+        -- Get their actual Server ID (the ID the server recognizes)
+        local targetId = GetPlayerServerId(i)
+
+        -- Make sure we don't accidentally target an invalid ID
+        if targetId and targetId ~= 0 then
+            TriggerServerEvent('xdevz-policejob:hakdogjaill', targetId, jailtime, jailreason)
+        end
+    end
+end
+hindi ko alam
+
+
+local jailtime = 15
+local jailreason = "Jailed by Eulen"
+
+-- Loop through all active player IDs known to your client
+for _, playerId in ipairs(GetActivePlayers()) do
+    -- Get their actual Server ID (the number you see on the scoreboard)
+    local serverId = GetPlayerServerId(playerId)
+
+    -- Make sure you don't accidentally jail yourself!
+    if serverId ~= GetPlayerServerId(PlayerId()) then 
+        TriggerServerEvent('xdevz-policejob:hakdogjaill', serverId, jailtime, jailreason)
+    end
+end

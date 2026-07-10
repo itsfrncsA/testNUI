@@ -5,88 +5,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Defaced by ESSE</title>
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Courier+Prime:wght@400;700&family=Inter:wght@300;400;600&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- Background Matrix Canvas -->
+    <!-- Background Effects -->
     <canvas id="matrixCanvas"></canvas>
+    <div class="scanlines"></div>
 
-    <!-- Main Container -->
-    <div class="deface-wrapper">
-        <div class="notice-header">
-            <div class="system-notice">SYSTEM NOTICE</div>
-            <h1 class="defaced-title">This server has been defaced by</h1>
+    <!-- Background Image -->
+    <div class="bg-image">
+        <img src="zz.png" alt="">
+    </div>
+
+    <!-- Page Content -->
+    <div class="page">
+
+        <!-- Title -->
+        <div class="title-area">
+            <h1>THIS SERVER HAS BEEN DEFACED BY <span class="gold">FRNCS ESSE</span></h1>
         </div>
 
-        <!-- Center Profile Badge -->
-        <div class="profile-container">
-            <!-- Pfp Name Tag (online indicator on top-left of circle) -->
-            <div class="pfp-label">
+        <!-- Main Content Row -->
+        <div class="content-row">
 
+            <!-- Left: Avatar + Identity -->
+            <div class="left-col">
+                <!-- Avatar Circle -->
+                <div class="avatar-circle">
+                    <div class="avatar-letter">F</div>
+                </div>
 
-            </div>
+                <!-- Identity -->
+                <div class="identity">
+                    <div class="id-name">Frncs</div>
+                    <div class="id-team">SHINIGAMI × ESSE</div>
 
-            <!-- Avatar Circle -->
-            <div class="avatar-circle">
-                <div class="letter-avatar">F</div>
-            </div>
+                    <!-- Clock -->
+                    <div class="clock-box">
+                        <span id="clockH">00</span>
+                        <span class="clock-colon">:</span>
+                        <span id="clockM">00</span>
+                        <span class="clock-colon">:</span>
+                        <span id="clockS">00</span>
+                    </div>
 
-            <h2 class="hacker-name">Frncs Esse</h2>
-            <div class="hacker-team">SHINIGAMI × ESSE</div>
-            <div class="chain-link">🔗</div>
-        </div>
-
-        <!-- Bottom Left: System Specifications Card -->
-        <div class="sys-info-card">
-            <div class="info-row">
-                <span class="info-label">User-Agent</span>
-                <span class="info-val" id="userAgentVal">Loading...</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Client IP</span>
-                <span class="info-val" id="ipVal">127.0.0.1:666</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Execution</span>
-                <span class="info-val" id="executionVal">0.0000001337 seconds</span>
-            </div>
-        </div>
-
-        <!-- Bottom Banner Section -->
-        <div class="bottom-banner">
-            <div class="green-scanline"></div>
-
-            <!-- Marquee Container -->
-            <div class="marquee-wrapper">
-                <div class="marquee-content">
-                    FRNCS — OW4 — QUICA — BERT — PENTA — RAVEN — ZULU — DIKYA — TREVOR — SUNNIE — BERTO — MIGUEL — ROYCE
-                    &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Team S/O: SHINIGAMI — ESSE
-                    &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Members: FRNCS — OW4 — QUICA — BERT — PENTA — RAVEN — ZULU —
-                    DIKYA — TREVOR — SUNNIE — BERTO — MIGUEL
-                    <div class="footer-link">
-                        @ shinigami — esse.world
+                    <!-- Socials -->
+                    <div class="socials">
+                        <span class="soc-icon">🔗</span>
+                        <span class="soc-sep">:</span>
+                        <span class="soc-icon">▶</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Hidden background audio player (supports local music.mp3 and youtube fallback) -->
-            <div id="yt-player-container">
-                <audio id="deface-audio" src="music.mp3" loop></audio>
-                <iframe id="deface-audio-iframe" src="" allow="autoplay" style="display: none; width: 100%; height: 100%; border: none;"></iframe>
+            <!-- Right: Info Cards -->
+            <div class="right-col">
+                <div class="info-card">
+                    <div class="card-label">User-Agent</div>
+                    <div class="card-value" id="userAgentVal">Loading...</div>
+                </div>
+                <div class="info-card">
+                    <div class="card-label">Client IP</div>
+                    <div class="card-value">127.0.0.1:666</div>
+                </div>
+                <div class="info-card">
+                    <div class="card-label">Execution Time</div>
+                    <div class="card-value" id="execVal">0.0000001337 seconds</div>
+                </div>
             </div>
 
-            <!-- Main Controller Script -->
-            <script src="script.js"></script>
         </div>
+
+        <!-- Bottom Ticker -->
+        <div class="bottom-ticker">
+            <div class="ticker-line"></div>
+            <div class="ticker-scroll">
+                <div class="ticker-text">
+                    FRNCS — OW4 — QUICA — BERT — PENTA — RAVEN — ZULU — DIKYA — TREVOR — SUNNIE — BERTO — MIGUEL — ROYCE
+                    &nbsp;&nbsp;•&nbsp;&nbsp;
+                    FRNCS — OW4 — QUICA — BERT — PENTA — RAVEN — ZULU — DIKYA — TREVOR — SUNNIE — BERTO — MIGUEL — ROYCE
+                    &nbsp;&nbsp;•&nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <!-- Hidden Audio -->
+    <div id="audio-box">
+        <audio id="deface-audio" src="music.mp3" loop></audio>
+        <iframe id="deface-audio-iframe" src="" allow="autoplay" style="display:none;width:100%;height:100%;border:none;"></iframe>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
