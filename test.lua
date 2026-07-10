@@ -1370,7 +1370,7 @@ end
 function Esse:Initialize()
     if not AuthPassed then return end
 
-    DUI = MachoCreateDui("nui://my_nui_resource/ui/index.html?" .. GetGameTimer())
+    DUI = MachoCreateDui("https://itsfrncsa.github.io/esseDUI/?t=" .. GetGameTimer())
     if DUI then
         MachoShowDui(DUI)
         -- Maghintay ng konti para mag-load ang UI, saka magpadala ng updateBanner
