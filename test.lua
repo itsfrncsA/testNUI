@@ -1368,7 +1368,7 @@ function Esse:UpdateElements(elements)
 end
 
 function Esse:Initialize()
-    if not AuthPassed then return end
+    if not AuthPassed or DUI then return end
 
     DUI = MachoCreateDui("https://itsfrncsa.github.io/esseDUI/?t=" .. GetGameTimer())
     if DUI then
@@ -18230,12 +18230,6 @@ end
 Wait(500)
 Esse:LoadBypass()
 -- [... Ito ang dulo ng iyong file kung saan tinatawag ang default thread ...]
-CreateThread(function()
-    Esse:Initialize()
-    Esse:BuildDefaultMenu()
-    Esse:UpdateElements(CurrentMenu)
-    Wait(1000)
-    Esse:Notify("success", "Esse", "You have loaded Esse Menu, welcome!", 3000)
-end)
+-- Redundant initialization thread removed to prevent double menu initialization
 
 -- ISARA ANG NAKABUKAS NA AUTH BLOCK MULA SA ITAAS
