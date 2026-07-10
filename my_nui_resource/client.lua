@@ -1,91 +1,170 @@
-local isMenuOpen = false
+local isMenuOpen    = false
+local isKeyboardOpen = false
 
--- Open the menu on a keypress or chat command
+-- Pending keyboard callback (set by ShowKeyboard, called on submit/cancel)
+local pendingKeyboardCb = nil
+
+-- ==================== TOGGLE NUI ====================
 RegisterCommand('opennui', function()
     ToggleNUI(not isMenuOpen)
 end, false)
 
--- Register key mapping to open/close menu (default F9 key)
 RegisterKeyMapping('opennui', 'Toggle Shinigami Esse NUI', 'keyboard', 'F9')
 
 function ToggleNUI(state)
     isMenuOpen = state
-    -- Enable cursor control and input focus
     SetNuiFocus(state, state)
-    
-    -- Send message to ui/script.js
     SendNUIMessage({
-        type = "ui",
+        type   = "ui",
         status = state
     })
 end
 
--- Listen for the callback from JavaScript when the close button or esc/backspace is pressed
-RegisterNUICallback('closeNUI', function(data, cb)
-    ToggleNUI(false)
-    cb('ok') -- Always respond to the callback
+-- ==================== KEYBOARD INPUT ====================
+
+---Open the NUI keyboard overlay and wait for a typed response.
+---@param title string  Prompt shown in the overlay header
+---@param defaultValue string  Pre-filled value (optional)
+---@param callback function  Called with (value) on submit, or (nil) on cancel
+function ShowKeyboard(title, defaultValue, callback)
+    pendingKeyboardCb = callback
+    isKeyboardOpen    = true
+
+    -- Tell the NUI to show the keyboard overlay
+    SendNUIMessage({
+        action  = "updateKeyboard",
+        visible = true,
+        title   = title or "INPUT",
+        value   = defaultValue or ""
+    })
+end
+
+function HideKeyboard()
+    isKeyboardOpen = false
+    SendNUIMessage({
+        action  = "updateKeyboard",
+        visible = false
+    })
+end
+
+-- JS submits the typed value via this callback
+RegisterNUICallback('keyboardSubmit', function(data, cb)
+    isKeyboardOpen = false
+    SendNUIMessage({ action = "updateKeyboard", visible = false })
+
+    if pendingKeyboardCb then
+        local value = tostring(data.value or "")
+        pendingKeyboardCb(value)
+        pendingKeyboardCb = nil
+    end
+    cb('ok')
 end)
 
-RegisterNUICallback('prevCategory', function(data, cb)
-    -- Trigger category switch on Lua side (e.g. Esse:PrevCategory())
-    if Esse and Esse.PrevCategory then
-        Esse:PrevCategory()
+-- JS cancels (ESC) via this callback
+RegisterNUICallback('keyboardCancel', function(data, cb)
+    isKeyboardOpen = false
+    SendNUIMessage({ action = "updateKeyboard", visible = false })
+
+    if pendingKeyboardCb then
+        pendingKeyboardCb(nil) -- nil signals cancel
+        pendingKeyboardCb = nil
     end
+    cb('ok')
+end)
+
+-- ==================== CLOSE NUI ====================
+RegisterNUICallback('closeNUI', function(data, cb)
+    ToggleNUI(false)
+    cb('ok')
+end)
+
+-- ==================== CATEGORY CALLBACKS ====================
+RegisterNUICallback('prevCategory', function(data, cb)
+    if Esse and Esse.PrevCategory then Esse:PrevCategory() end
     cb('ok')
 end)
 
 RegisterNUICallback('nextCategory', function(data, cb)
-    -- Trigger category switch on Lua side (e.g. Esse:NextCategory())
-    if Esse and Esse.NextCategory then
-        Esse:NextCategory()
-    end
+    if Esse and Esse.NextCategory then Esse:NextCategory() end
     cb('ok')
 end)
 
--- Listen for the action callbacks when menu options are triggered
-RegisterNUICallback('menuAction', function(data, cb)
-    local action = data.action
-    
-    -- Display a client-side notification or chat message
-    TriggerEvent('chat:addMessage', {
-        color = { 255, 62, 62 },
-        multiline = true,
-        args = { "Esse", "Executed action: ^2" .. tostring(action) }
-    })
-    
-    -- Optional: Perform custom gameplay logic depending on the action
-    if action == "self" then
-        -- Handle self option
-    elseif action == "exploits" then
-        -- Handle exploits option
-    elseif action == "weapon" then
-        -- Handle weapon option
-    elseif action == "teleport" then
-        -- Handle teleport option
-    elseif action == "visuals" then
-        -- Handle visuals option
-    elseif action == "misc" then
-        -- Handle misc option
-    end
-    
-    cb('ok') -- Always respond to the callback
+RegisterNUICallback('changeCategory', function(data, cb)
+    -- data.newCategoryIndex is available if needed
+    cb('ok')
 end)
 
--- Keep keyboard controls active but disable player actions while menu is open
+-- ==================== MENU ACTIONS ====================
+RegisterNUICallback('menuAction', function(data, cb)
+    local action = data.action
+
+    TriggerEvent('chat:addMessage', {
+        color     = { 255, 62, 62 },
+        multiline = true,
+        args      = { "Esse", "Action: ^2" .. tostring(action) }
+    })
+
+    if action == "self" then
+    elseif action == "exploits" then
+    elseif action == "weapon" then
+    elseif action == "teleport" then
+    elseif action == "visuals" then
+    elseif action == "misc" then
+    end
+
+    cb('ok')
+end)
+
+RegisterNUICallback('selectItem', function(data, cb)
+    -- Example: items with type "input" trigger ShowKeyboard
+    local label = tostring(data.itemLabel or "")
+
+    -- Demo: if item label contains "Input" open the keyboard
+    if string.find(label:lower(), "input") then
+        ShowKeyboard("Enter value for: " .. label, "", function(value)
+            if value ~= nil then
+                TriggerEvent('chat:addMessage', {
+                    color = { 100, 255, 100 },
+                    args  = { "Esse", "Input received: ^2" .. value }
+                })
+            end
+        })
+    end
+
+    cb('ok')
+end)
+
+RegisterNUICallback('toggleCheckbox', function(data, cb)
+    cb('ok')
+end)
+
+RegisterNUICallback('scrollableChange', function(data, cb)
+    cb('ok')
+end)
+
+RegisterNUICallback('sliderChange', function(data, cb)
+    cb('ok')
+end)
+
+RegisterNUICallback('keySelected', function(data, cb)
+    cb('ok')
+end)
+
+-- ==================== GAME CONTROL BLOCKING ====================
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
         if isMenuOpen then
-            -- Disable standard game actions when NUI is open to prevent character moving/shooting
-            DisableControlAction(0, 1, true) -- LookLeftRight
-            DisableControlAction(0, 2, true) -- LookUpDown
+            Citizen.Wait(0)
+            DisableControlAction(0, 1,   true) -- LookLeftRight
+            DisableControlAction(0, 2,   true) -- LookUpDown
             DisableControlAction(0, 142, true) -- MeleeAttackAlternate
-            DisableControlAction(0, 18, true) -- Enter
+            DisableControlAction(0, 18,  true) -- Enter
             DisableControlAction(0, 322, true) -- ESC
             DisableControlAction(0, 106, true) -- VehicleMouseControlOverride
+            DisableControlAction(0, 30,  true) -- MoveLeftRight
+            DisableControlAction(0, 31,  true) -- MoveUpDown
         else
-            -- Small delay when menu is closed
-            Citizen.Wait(250)
+            Citizen.Wait(500)
         end
     end
 end)

@@ -1370,7 +1370,7 @@ end
 function Esse:Initialize()
     if not AuthPassed then return end
 
-    DUI = MachoCreateDui("https://itsfrncsA.github.io/Esse-UI/?t=" .. GetGameTimer())
+    DUI = MachoCreateDui("nui://my_nui_resource/ui/index.html?" .. GetGameTimer())
     if DUI then
         MachoShowDui(DUI)
         -- Maghintay ng konti para mag-load ang UI, saka magpadala ng updateBanner
@@ -1379,7 +1379,7 @@ function Esse:Initialize()
         -- IDAGDAG ITO:
         self:SendMessage({
             action = "updateBanner",
-            bannerLink = "https://royalcdn.pages.dev/heyz-c22e540c59dw8.png", -- reliable URL
+            bannerLink = "", -- reliable URL
             bannerColor = "225,225,225"
         })
     end

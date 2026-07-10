@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Shinigami Esse Menu</title>
+    <meta name="description" content="Shinigami Esse - Enhanced FiveM NUI Menu">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Orbitron:wght@400;500;700;900&display=swap"
         rel="stylesheet">
 
-    <!-- CRITICAL: Inline transparency - cannot be cached separately -->
+    <!-- CRITICAL: Inline transparency -->
     <style>
         html, body {
             background: transparent !important;
@@ -25,34 +26,53 @@
 </head>
 
 <body>
+
+    <!-- Atmospheric scanline overlay -->
+    <div class="scanline-overlay" aria-hidden="true"></div>
+
     <!-- Main Menu -->
     <div class="nui-wrapper" id="mainMenu">
-        <div class="menu-container">
-            <!-- Banner (optional, controlled by Lua updateBanner) -->
+        <div class="menu-container" id="menuContainer">
+
+            <!-- Banner (optional) -->
             <div class="menu-banner" id="menuBanner" style="display:none;">
-                <img id="bannerImage" src="" alt="">
+                <img id="bannerImage" src="" alt="Banner">
             </div>
 
+            <!-- Header -->
             <div class="menu-header">
-                <div class="menu-title">SHINIGAMI</div>
-                <div class="menu-subtitle">ESSE</div>
+                <div class="menu-title" id="menuTitle">SHINIGAMI</div>
+                <div class="menu-subtitle" id="menuSubtitle">ESSE &nbsp;•&nbsp; V2</div>
             </div>
 
+            <!-- Active category name badge -->
+            <div class="category-badge" id="categoryBadge">
+                <span class="category-badge-dot"></span>
+                <span id="categoryBadgeName">List</span>
+            </div>
+
+            <!-- Category tabs -->
             <div class="category-tabs" id="categoryTabs"></div>
 
-            <div class="menu-items-wrapper">
+            <!-- Menu items -->
+            <div class="menu-items-wrapper" id="menuItemsWrapper">
                 <ul class="menu-list" id="menuList"></ul>
             </div>
 
+            <!-- Active item description bar -->
+            <div class="desc-bar" id="descBar">Select an option</div>
+
+            <!-- Footer -->
             <div class="menu-footer">
                 <span class="footer-credit" id="footerCredit">/Made By | Frncs</span>
-                <span class="footer-counter" id="itemCounter">1/8</span>
+                <span class="footer-counter" id="itemCounter">01/08</span>
             </div>
+
         </div>
     </div>
 
     <!-- Keyboard Input Overlay -->
-    <div class="keyboard-overlay" id="keyboardOverlay">
+    <div class="keyboard-overlay" id="keyboardOverlay" role="dialog" aria-modal="true">
         <div class="keyboard-container">
             <div class="keyboard-header">
                 <div class="keyboard-title" id="keyboardTitle">INPUT</div>
@@ -68,7 +88,7 @@
     </div>
 
     <!-- Key Selector Overlay -->
-    <div class="key-selector-overlay" id="keySelectorOverlay">
+    <div class="key-selector-overlay" id="keySelectorOverlay" role="dialog" aria-modal="true">
         <div class="key-selector-container">
             <div class="key-selector-header">
                 <div class="key-selector-title">SELECT MENU KEY</div>
@@ -84,7 +104,7 @@
     </div>
 
     <!-- Notification Container -->
-    <div class="notification-container" id="notificationContainer"></div>
+    <div class="notification-container" id="notificationContainer" aria-live="polite"></div>
 
     <script src="script.js"></script>
 </body>
